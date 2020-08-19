@@ -57,10 +57,12 @@ int main(){
         if(str[curr_str]==pat[curr_pat]){
             curr_str++;
             curr_pat++;
-        } else{
+        } 
+        else{
             if(curr_pat==0) curr_str++;
             else curr_pat = lp[curr_pat-1];
         }
+        
         if(curr_pat==m){
             start_indexes.push_back(curr_str-m);
             curr_pat = lp[m-1];
