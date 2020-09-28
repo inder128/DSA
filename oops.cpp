@@ -1,18 +1,22 @@
-// Difference Between Object and Class in C++
+/*
 
-// Class is a collection of related data and functions under a single name;
-// Class is a template or blueprint with which objects are created is known as Class.
-// It is a user-defined data type, which holds its own data members and member functions,
-// which can be accessed and used by creating an instance (or object) of that class.
-// Data members are the data variables and member functions are the functions used to
-// manipulate these variables and together these data members and member functions define
-// the properties and behaviour of the objects (or instance) of that Class.
+Difference Between Object and Class in C++
 
-// The class is a technique used to bind data and its associated functions together, 
-// in contrast, Object is the created instance of a class.
+Class is a collection of related data and functions under a single name;
+Class is a template or blueprint with which objects are created is known as Class.
+It is a user-defined data type, which holds its own data members and member functions,
+which can be accessed and used by creating an instance (or object) of that class.
+Data members are the data variables and member functions are the functions used to
+manipulate these variables and together these data members and member functions define
+the properties and behaviour of the objects (or instance) of that Class.
 
-// Object (or instances of a class) is invoked by new keyword. It consumes memory, 
-// but when a class is defined it consumes no memory;
+The class is a technique used to bind data and its associated functions together, 
+in contrast, Object is the created instance of a class.
+
+Object (or instances of a class) is invoked by new keyword. It consumes memory, 
+but when a class is defined it consumes no memory;
+
+*/
 
 // operator overlading 
 // default comparetor;
@@ -52,7 +56,7 @@ class cube{
 
 	// this constructer gets executed if instance or object is created using new keyword
 	// All inside class functions are inline functions by default.
-	// Macro vs Inline fn :- Macro cannot access private members of class.
+	// Macro vs Inline fn :- Macro cannot access data members of class.
 	// inline functions :-  ( https://www.geeksforgeeks.org/inline-functions-cpp/ )
 	// Inline function is a function that is expanded in line when it is called.
 	// usually online small function should be inside because they are inline.
@@ -115,13 +119,7 @@ void diff_allocations(){
 	// NULL is typically defined as (void *) pointer;
 }
 
-// Encapsulation:-
-// it is wraping up the data and the fumctions that manipulates them.
-// it also leads to data abstraction or hiding, which will be discussed later.
-// The process of implementing encapsulation can be sub-divided into two steps:
-//   1)- The data members should be labeled as private using the private access specifiers
-//   2)- The member function which manipulates the data members should be labeled 
-// 	     as public using the public access specifier.
+
 
 
 int main(){
@@ -130,21 +128,7 @@ int main(){
 }
 
 
-// Pointers: A pointer is a variable that holds memory address of another variable. 
-// A pointer needs to be dereferenced with * operator to access the memory location it points to.
 
-// References : A reference variable is an alias, that is, another name for an already existing variable. 
-// A reference, like a pointer, is also implemented by storing the address of an object.
-
-
-// Python vs C++ :-
-//	C++ code needs curly brackets and semicolons to work;
-// 	In python code should be properly indentated
-//	Instead of using a semicolon, Python treats the end of the line as the end of the statement
-//	Variables in C++ need to have a type;
-//  Dynamic typing is a feature of Python, meaning that you do not need to indicate the type of the object
-//	C++ code must be compiled before running
-// 	In Python code is intrepreted line by line (slow)
 
 
 
@@ -181,9 +165,51 @@ void DELETEandNEW(){
     return 0;
 }
 
+/*
+
+Encapsulation:-
+it is wraping up the data and the functions that manipulates them.
+it also leads to data abstraction or hiding, which will be discussed later.
+The process of implementing encapsulation can be sub-divided into two steps:
+  1)- The data members should be labeled as private using the private access specifiers
+  2)- The member function which manipulates the data members should be labeled 
+	     as public using the public access specifier.
+
+Encapsulation is defined as binding together the data and the functions that manipulates them. 
+In the above program the variable x is made private. This variable can be accessed and 
+manipulated only using the functions get() and set() which are present inside the class. 
+Thus we can say that here, the variable x and the functions get() and set() are binded together which is nothing but encapsulation.
 
 
 
+Data abstraction refers to providing only essential information about the data to the outside world, 
+hiding the background details or implementation. Ex :- pow().
 
 
 
+Pointers: A pointer is a variable that holds memory address of another variable. 
+A pointer needs to be dereferenced with * operator to access the memory location it points to.
+
+References : A reference variable is an alias, that is, another name for an already existing variable. 
+A reference, like a pointer, is also implemented by storing the address of an object.
+
+
+Python vs C++ :-
+	C++ code needs curly brackets and semicolons to work;
+	In python code should be properly indentated
+	Instead of using a semicolon, Python treats the end of the line as the end of the statement
+	Variables in C++ need to have a type;
+ Dynamic typing is a feature of Python, meaning that you do not need to indicate the type of the object
+	C++ code must be compiled before running
+	In Python code is intrepreted line by line (slow)
+
+
+There is no such thing as access specifiers in structs.
+
+
+
+Static Data Member in c++ :-
+https://www.geeksforgeeks.org/static-data-members-c/
+https://www.geeksforgeeks.org/count-number-objects-using-static-member-function/
+
+*/

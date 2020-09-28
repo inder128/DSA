@@ -38,9 +38,6 @@ void update(vector<long long> &f, int pos, int val) {
 // 	    res += f[pos];
 // 	return res;
 // }
-// ll get(int l, int r){
-// 	return get(r) - (l ? get(l-1) : 0);
-// }
 // void update(int pos, int val){
 // 	for (; pos < int(f.size()); pos |= pos + 1)
 // 		f[pos] += val;
