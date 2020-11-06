@@ -4,6 +4,7 @@ using namespace std;
 #define deb(x) cout<<#x<<"="<<x<<endl
 #define deb2(x,y) cout<<#x<<"="<<x<<", "<<#y<<"="<<y<<endl
 #define deb3(x,y,z) cout<<#x<<"="<<x<<", "<<#y<<"="<<y<<", "<<#z<<"="<<z <<endl
+typedef long long ll; typedef vector<ll> vl;
 
 // FANVICK TREE (Binary Index Tree)
 // It performs same operations as segment tree but more efficiently;
@@ -14,8 +15,8 @@ using namespace std;
 // https://codeforces.com/problemset/problem/1311/F
 
 // below function returns sum of values upto index pos(included);
-long long get(vector<long long> &f, int pos) {
-	long long res = 0;
+ll get(vector<ll> &f, int pos) {
+	ll res = 0;
 	for (; pos >= 0; pos = (pos & (pos + 1)) - 1){
 	    res += f[pos];
 	}
@@ -25,8 +26,8 @@ long long get(vector<long long> &f, int pos) {
 // below function increase the value in vector f at index
 // pos by val and all its ansestors in the tree;
 // Can also be used to put values initially;
-void update(vector<long long> &f, int pos, int val) {
-	for (; pos < int(f.size()); pos |= pos + 1) {
+void update(vector<ll> &f, int pos, int val) {
+	for (; pos < int(f.size()); pos = (pos | (pos + 1))) {
 		f[pos] += val;
 	}
 }
@@ -39,7 +40,7 @@ void update(vector<long long> &f, int pos, int val) {
 // 	return res;
 // }
 // void update(int pos, int val){
-// 	for (; pos < int(f.size()); pos |= pos + 1)
+// 	for (; pos < int(f.size()); pos = (pos | (pos + 1)))
 // 		f[pos] += val;
 // }
 // delete element at K'th order statatic (count of values);
@@ -120,3 +121,4 @@ int main() {
 	}
 	cout << ans << endl;
 	return 0;
+}
