@@ -1,21 +1,25 @@
-template<int SZ> struct DSU {
-    int par[SZ], sz[SZ];
+class DSU{ 
+public: 
+    vi size, par;
+    int n;
 
-    DSU() {
-        for (int i = 0; i < SZ; ++i)
-         	par[i] = i, sz[i] = 1;
+    DSU(int n){ 
+        this->n = n; 
+        size.assign(n, 1);
+        par.resize(n);
+        iota(rng(par), 0);
     }
 
-    int get(int x) { // path compression
-    	if (par[x] != x) par[x] = get(par[x]);
-    	return par[x];
+    int getPar(int u){
+        return par[u] = (par[u] == u ? u : getPar(par[u]));
     }
 
-    bool unite(int x, int y) { // union-by-rank
-    	x = get(x), y = get(y);
-    	if (x == y) return 0;
-    	if (sz[x] < sz[y]) swap(x,y);
-    	sz[x] += sz[y], par[y] = x;
-    	return 1;
+    bool unite(int u, int v){
+        u = getPar(u), v = getPar(v);
+        if(u == v) return false;
+
+        if(size[u] > size[v]) swap(u, v);
+        size[v] += size[u], par[u] = v;
+        return true;
     }
 };
