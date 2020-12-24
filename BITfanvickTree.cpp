@@ -1,9 +1,10 @@
 class BIT{
+public :
 	int n;
 	vi f;
 	BIT(int n){
 		this->n = n;
-		f.assign(n);
+		f.assign(n, 0);
 	}
 
 	int get(int pos){
@@ -14,9 +15,14 @@ class BIT{
 		return res;
 	}
 
-	void update(int pos, int val){
-		for (; pos < int(f.size()); pos = (pos | (pos + 1))) {
+	int get(int l, int r){
+		if(l > r) return 0;
+		return get(r) - get(l - 1);
+	}
+
+	void increase(int pos, int val){
+		for (; pos < SZ(f); pos = (pos | (pos + 1))) {
 			f[pos] += val;
 		}
 	}
-}
+};

@@ -9,7 +9,7 @@ public :
 	BitTrie(){
 		// numbers should be less that (2 ^ D);
 		// size of trie containing all elements less than (2 ^ D) will be (2 ^ (D + 1) - 1);
-		D = 19;
+		D = 30;
 		trie.pb({{-1, -1}});
 	}
 
@@ -24,30 +24,32 @@ public :
 		}
 	}
 
-	int minXOR(int xr){
-		int curr = 0, num = 0;
+	int XOR(int xr, bool mn = true){
+        int curr = 0, num = 0;
 
-		for(int i = D - 1; i >= 0; --i){
-			if(xr >> i & 1){
-				if(trie[curr].c[1] != -1){
-					curr = trie[curr].c[1];
-					num += (1 << i);
-				}
-				else{
-					curr = trie[curr].c[0];
-				}
-			}
-			else{
-				if(trie[curr].c[0] != -1){
-					curr = trie[curr].c[0];
-				}
-				else{
-					curr = trie[curr].c[1];
-					num += (1 << i);
-				}
-			}
-		}
+        for(int i = D - 1; i >= 0; --i){
+            if(xr >> i & 1){
+                if(trie[curr].c[mn] != -1){
+                    curr = trie[curr].c[mn];
+                    num += (1 << i) * mn;
+                }
+                else{
+                    curr = trie[curr].c[!mn];
+                    num += (1 << i) * (!mn);
+                }
+            }
+            else{
+                if(trie[curr].c[!mn] != -1){
+                    curr = trie[curr].c[!mn];
+                    num += (1 << i) * (!mn);
+                }
+                else{
+                    curr = trie[curr].c[mn];
+                    num += (1 << i) * mn;
+                }
+            }
+        }
 
-		return num ^ xr;
-	}
+        return num ^ xr;
+    }
 };
