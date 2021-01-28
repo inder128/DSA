@@ -25,4 +25,21 @@ public :
 			f[pos] += val;
 		}
 	}
+
+	// (logn)^2;
+	int operator[](int i){
+		int l = -1, r = n;
+		// invarients;
+		// get(r) > i, get(l) <= i;
+		while(l + 1 < r){
+			int m = (l + r) >> 1;
+			if(get(m) > i){
+				r = m;
+			}
+			else{
+				l = m;
+			}
+		}
+		return r;
+	}
 };

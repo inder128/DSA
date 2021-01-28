@@ -5,7 +5,7 @@ public:
 	int k, n;
 
 	sparseTable(vi &arr_){
-		build(arr);
+		build(arr_);
 	}
 
 	sparseTable(){
