@@ -1,19 +1,18 @@
-class sparseTable{
+class SparseTable {
 public:
 	vvi spt;
 	vi arr, numLog;
 	int k, n;
 
-	sparseTable(vi &arr_){
-		build(arr_);
+	SparseTable (vi &arr) {
+		build(arr);
 	}
 
-	sparseTable(){
-	}
+	SparseTable () {}
 
-	void build(vi &arr_){
-		arr = arr_;
-		n = arr.size();
+	void build (vi &arr) {
+		this->arr = arr;
+		n = this->arr.size();
 
 		numLog.resize(n + 1);
 		numLog[1] = 0;
@@ -33,16 +32,16 @@ public:
 		}
 	}
 
-	int compare(int s1, int s2){
+	int compare (int s1, int s2) {
 		return (arr[s1] < arr[s2] ? s1 : s2);
 	}
 
-	int get(int l, int r){
+	int get (int l, int r) {
 		int lg = numLog[r - l + 1];
 		return compare(spt[lg][l], spt[lg][r - (1 << lg) + 1]);
 	}
 
-	int getVal(int l, int r){
+	int getVal (int l, int r) {
 		return arr[get(l, r)];
 	}
 };

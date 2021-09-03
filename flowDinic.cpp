@@ -1,37 +1,38 @@
-struct edge{
+struct edge {
     int u, v;
     int cap, flow = 0;
-    edge(int u, int v, int cap) : u(u), v(v), cap(cap) {}
+    edge (int u, int v, int cap) : u(u), v(v), cap(cap) {}
 };
  
  
-struct Dinic{
+struct Dinic {
     vi lvl, ptr;
     vvi adj;
     vector <edge> edges;
     queue <int> Q;
     int n, m = 0;
-    int s, t;
-    const int inf = 1e9;
+    int source, target;
+    const int INF = 1e9;
     
-    Dinic(int n, int s, int t) : n(n), s(s), t(t){
+    Dinic (int n, int source, int target) : n(n), source(source), target(target) {
         adj.resize(n);
         lvl.resize(n);
         ptr.resize(n);
     }
-    void addEdge(int u, int v, int c){
+
+    void addEdge (int u, int v, int c) {
         edges.emplace_back(u, v, c);
         edges.emplace_back(v, u, 0);
-        adj[u].pb(m);
-        adj[v].pb(m + 1);
-        m += 2;
+        adj[u].pb(m++);
+        adj[v].pb(m++);
     }
     
-    
-    bool bfs(){
-        while(!Q.empty()){
-            int f = Q.front();
-            Q.pop();
+    bool bfs () {
+        lvl.assign(n, -1);
+        lvl[source] = 0;
+        Q.push(source);
+        while(SZ(Q)){
+            int f = Q.front(); Q.pop();
             for(auto it: adj[f]){
                 if(lvl[edges[it].v] != -1 or edges[it].cap - edges[it].flow < 1){
                     continue;
@@ -40,12 +41,11 @@ struct Dinic{
                 Q.push(edges[it].v);
             }
         }
-        return lvl[t] != -1;
+        return lvl[target] != -1;
     }
     
-    
-    int dfs(int u, int bneck){
-        if(bneck == 0 or u == t){
+    int dfs (int u, int bneck) {
+        if(bneck == 0 or u == target){
             return bneck;
         }
         for(int& id = ptr[u]; id < adj[u].size(); id++){
@@ -57,28 +57,22 @@ struct Dinic{
             if(f == 0){
                 continue;
             }
-            edges[it].flow += f;
-            edges[it ^ 1].flow -= f;
+            edges[it].flow += f, edges[it ^ 1].flow -= f;
             return f;
         }
         return 0;
     }
     
-    
-    int flow(){
-        int f = 0;
-        while(true){
-            lvl.assign(n, -1);
-            lvl[s] = 0;
-            Q.push(s);
-            if(bfs() == false){
-                break;
-            }
+    int flow () {
+        int maxFlow = 0;
+        while(bfs()){
             ptr.assign(n, 0);
-            while(int bneck = dfs(s,inf)){
-                f += bneck;
+            int bneck = dfs(source, INF);
+            while(bneck){
+                maxFlow += bneck;
+                bneck = dfs(source, INF);
             }
         }
-        return f;
+        return maxFlow;
     }
 };
