@@ -1,21 +1,22 @@
-class DSU{ 
+class DSU { 
 public: 
     vi size, par;
     int n;
 
-    DSU(int n){ 
+    DSU (int n) { 
         this->n = n; 
         size.assign(n, 1);
         par.resize(n);
         iota(rng(par), 0);
     }
 
-    int getPar(int u){
-        return par[u] = (par[u] == u ? u : getPar(par[u]));
+    int getRoot (int u) {
+        return par[u] = (par[u] == u ? u : getRoot(par[u]));
     }
 
-    bool unite(int u, int v){
-        u = getPar(u), v = getPar(v);
+    bool unite (int u, int v) {
+        u = getRoot(u), v = getRoot(v);
+
         if(u == v) return false;
 
         if(size[u] > size[v]) swap(u, v);
@@ -25,38 +26,37 @@ public:
 };
 
 // O(nlogn); linkedlist;
-class DSU{ 
+class DSU { 
 public: 
     vi par;
     vector <vi> nodes;
     int n;
 
-    DSU(int n){ 
+    DSU (int n) { 
         this->n = n; 
         par.resize(n);
         nodes.resize(n);
-        for (int i = 0; i < n; ++i){
+        for (int i = 0; i < n; ++i) {
             par[i] = i;
             nodes[i].pb(i);
         }
     }
 
-    int size(int u){
+    int size (int u) {
         return nodes[u].size();
     }
 
-    bool unite(int u, int v){
+    bool unite (int u, int v) {
         u = par[u], v = par[v];
-        if(u == v) return false;
 
-        if(size(u) > size(v)) swap(u, v);
-        
-        while(nodes[u].size()){
+        if (u == v) return false;
+
+        if (size(u) > size(v)) swap(u, v);
+        while (nodes[u].size()) {
             int w = nodes[u].back(); nodes[u].pop_back();
             nodes[v].pb(w);
             par[w] = v;
         }
-
         return true;
     }
 };
